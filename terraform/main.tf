@@ -7,10 +7,10 @@ module "alb" {
 }
 module "autoscaling" {
   source = "./modules/autoscaling_group"
-  KEYPAIR_NAME = var.KEYPAIR_NAME
-  AWS_REGION     = var.AWS_REGION
-  AMIS = var.AMIS
-  JENKINS_INSTANCE_TYPE = var.JENKINS_INSTANCE_TYPE
+  keypair_name = var.keypair_name
+  aws_region     = var.aws_region
+  amis = var.amis
+  jenkins_instance_type = var.jenkins_instance_type
   instance_security_group_id = module.securitygroup.instance_security_group_id
   private_subnets = var.private_subnets
   instance_profile = module.iamrole.instance_profile
@@ -22,3 +22,4 @@ module "autoscaling" {
 module "iamrole" {
   source = "./modules/iamrole"
 }
+

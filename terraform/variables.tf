@@ -1,7 +1,7 @@
-variable "AWS_REGION" {}
-variable "AMIS" {}
-variable "JENKINS_INSTANCE_TYPE" {}
-variable "KEYPAIR_NAME" {}
+variable "aws_region" {}
+variable "amis" {}
+variable "jenkins_instance_type" {}
+variable "keypair_name" {}
 variable "public_subnets" {}
 variable "private_subnets" {}
 variable "vpc_id" {}

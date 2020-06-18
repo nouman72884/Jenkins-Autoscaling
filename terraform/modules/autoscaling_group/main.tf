@@ -4,9 +4,9 @@ data "template_file" "userdata" {
 
 resource "aws_launch_configuration" "launchconfiguration" {
   name_prefix     = "${terraform.workspace}-launchconfiguration_test"
-  image_id        = var.AMIS
-  instance_type   = var.JENKINS_INSTANCE_TYPE
-  key_name        = var.KEYPAIR_NAME
+  image_id        = var.amis
+  instance_type   = var.jenkins_instance_type
+  key_name        = var.keypair_name
   security_groups = [var.instance_security_group_id]
   iam_instance_profile = var.instance_profile
   user_data = data.template_file.userdata.template
