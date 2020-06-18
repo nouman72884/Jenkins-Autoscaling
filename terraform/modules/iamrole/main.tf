@@ -1,5 +1,5 @@
-resource "aws_iam_role" "ec2_role" {
-  name = "ec2_role"
+resource "aws_iam_role" "jenkins_role" {
+  name = "jenkins_role"
 
   assume_role_policy = <<EOF
 {
@@ -18,25 +18,23 @@ resource "aws_iam_role" "ec2_role" {
 EOF
 
   tags = {
-      Name = "ec2-role"
+      Name = "jenkins_role"
   }
 }
-resource "aws_iam_role_policy" "policy" {
-  name = "test_policy"
-  role = aws_iam_role.ec2_role.id
+resource "aws_iam_role_policy" "jenkins_role_policy" {
+  name = "jenkins_role_policy"
+  role = aws_iam_role. jenkins_role.id
 
   policy = <<EOF
 {
   "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "ecr:*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        }
+    ]
 }
 EOF
 }
@@ -47,5 +45,6 @@ EOF
 # }
 resource "aws_iam_instance_profile" "instance_profile" {
   name = "instance_profile"
-  role = aws_iam_role.ec2_role.name
+  role = aws_iam_role.jenkins_role.name
 }
+
