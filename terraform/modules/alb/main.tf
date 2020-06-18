@@ -4,7 +4,6 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [var.alb_security_group_id]
   subnets            = var.public_subnets
-
   enable_deletion_protection = false
 }
 resource "aws_lb_target_group" "alb_target_group" {
@@ -25,13 +24,30 @@ resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
+  
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+
+    }
+  }
+}
+resource "aws_lb_listener" "listener_443" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-east-1:020046395185:certificate/3b3e2a2e-6578-4a4e-afbd-fd770a4ccad6"
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.alb_target_group.arn
+    target_group_arn = "${aws_lb_target_group.alb_target_group.arn}"
   }
 }
-
 resource "aws_autoscaling_attachment" "asg_attachment" {
   autoscaling_group_name = var.autoscaling_group_id
   alb_target_group_arn   = aws_lb_target_group.alb_target_group.arn
