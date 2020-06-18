@@ -5,4 +5,5 @@ amis = "ami-01d025118d8e760db"
 vpc_id = "vpc-a0eeacda"
 public_subnets = ["subnet-648fca5a","subnet-e2e209ec"]
 private_subnets = ["subnet-0feb117f9e0981c83","subnet-098cf3f649e95cbef"]
+certificate_arn = "arn:aws:acm:us-east-1:020046395185:certificate/3b3e2a2e-6578-4a4e-afbd-fd770a4ccad6"
 

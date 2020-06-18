@@ -4,6 +4,7 @@ module "alb" {
   alb_security_group_id = module.securitygroup.alb_security_group_id
   public_subnets = var.public_subnets
   autoscaling_group_id = module.autoscaling.autoscaling_group_id
+  certificate_arn = var.certificate_arn
 }
 module "autoscaling" {
   source = "./modules/autoscaling_group"
