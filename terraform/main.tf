@@ -5,7 +5,7 @@ module "alb" {
   public_subnets = var.public_subnets
   autoscaling_group_id = module.autoscaling.autoscaling_group_id
   certificate_arn = var.certificate_arn
-  NAME = var.NAME
+  name = var.name
 }
 module "autoscaling" {
   source = "./modules/autoscaling_group"
@@ -16,13 +16,13 @@ module "autoscaling" {
   instance_security_group_id = module.securitygroup.instance_security_group_id
   private_subnets = var.private_subnets
   instance_profile = module.iamrole.instance_profile
-  NAME = var.NAME
+  name = var.name
   volume_size = var.volume_size
  }
  module "securitygroup" {
   source = "./modules/security_group"
   vpc_id = var.vpc_id
-  NAME = var.NAME
+  name = var.name
 }
 module "iamrole" {
   source = "./modules/iamrole"

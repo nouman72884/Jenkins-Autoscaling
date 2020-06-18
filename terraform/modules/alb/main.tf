@@ -1,5 +1,5 @@
 resource "aws_lb" "alb" {
-  name               = "${terraform.workspace}-${var.NAME}-ALB"
+  name               = "${terraform.workspace}-${var.name}-ALB"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.alb_security_group_id]
@@ -7,7 +7,7 @@ resource "aws_lb" "alb" {
   enable_deletion_protection = false
 }
 resource "aws_lb_target_group" "alb_target_group" {
-  name     = "${terraform.workspace}-${var.NAME}-TargetGroup"
+  name     = "${terraform.workspace}-${var.name}-TargetGroup"
   port     = "80"
   protocol = "HTTP"
   vpc_id   = var.vpc_id

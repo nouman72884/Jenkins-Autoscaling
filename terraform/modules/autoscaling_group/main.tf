@@ -3,7 +3,7 @@ data "template_file" "userdata" {
 }
 
 resource "aws_launch_configuration" "launchconfiguration" {
-  name_prefix     = "${terraform.workspace}-${var.NAME}-launchconfiguration"
+  name_prefix     = "${terraform.workspace}-${var.name}-launchconfiguration"
   image_id        = var.amis
   instance_type   = var.jenkins_instance_type
   key_name        = var.keypair_name
@@ -18,7 +18,7 @@ resource "aws_launch_configuration" "launchconfiguration" {
 }
 }
 resource "aws_autoscaling_group" "autoscaling" {
-  name                      = "${terraform.workspace}-${var.NAME}-autoscaling"
+  name                      = "${terraform.workspace}-${var.name}-autoscaling"
   vpc_zone_identifier       = var.private_subnets  
   #availability_zones        = data.aws_availability_zones.available.names
   launch_configuration      = aws_launch_configuration.launchconfiguration.name
@@ -31,11 +31,10 @@ resource "aws_autoscaling_group" "autoscaling" {
 
   tag {
     key                 = "Name"
-    value               = "${terraform.workspace}_${var.NAME}"
+    value               = "${terraform.workspace}_${var.name}"
     propagate_at_launch = true
   }
 }
-
 
 
 
