@@ -1,4 +1,4 @@
 variable "vpc_id" {}
 variable "name" {}
-variable "bastion_ips" {}
-
+variable "jenkins_sg" {}
+variable "jenkins_sg_ports" {}

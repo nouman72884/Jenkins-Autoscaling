@@ -23,7 +23,8 @@ module "autoscaling" {
   source = "./modules/security_group"
   vpc_id = var.vpc_id
   name = var.name
-  bastion_ips = var.bastion_ips
+  jenkins_sg = var.jenkins_sg
+  jenkins_sg_ports = var.jenkins_sg_ports
 }
 module "iamrole" {
   source = "./modules/iamrole"
