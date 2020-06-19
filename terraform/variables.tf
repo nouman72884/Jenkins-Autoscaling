@@ -8,7 +8,6 @@ variable "vpc_id" {}
 variable "certificate_arn" {}
 variable "name" {}
 variable "volume_size" {}
-variable "jenkins_sg" {}
 variable "jenkins_sg_ports" {
   type = "map"
 }
