@@ -13,7 +13,7 @@ resource "aws_security_group" "instance_security_group" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["18.212.37.142/32","172.31.89.80/32"]
+    cidr_blocks = var.bastion_ips
     security_groups = [aws_security_group.alb_security_group.id]
   }
   tags = {
@@ -42,3 +42,4 @@ resource "aws_security_group" "alb_security_group" {
     Name = "${terraform.workspace}-${var.name}-ALB-sg"
   }
 }
+
