@@ -23,8 +23,8 @@ module "autoscaling" {
   source = "./modules/security_group"
   vpc_id = var.vpc_id
   name = var.name
+  bastion_ips = var.bastion_ips
 }
 module "iamrole" {
   source = "./modules/iamrole"
 }
-
