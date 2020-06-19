@@ -1,11 +1,10 @@
-variable "AWS_REGION" {}
-variable "AMIS"{}
-variable "KEYPAIR_NAME" {}
-variable "JENKINS_INSTANCE_TYPE" {}
+variable "aws_region" {}
+variable "amis"{}
+variable "keypair_name" {}
+variable "jenkins_instance_type" {}
 variable "instance_security_group_id" {}
-variable "NAME" {
-  default = "autoscaling"
-}
+variable "name" {}
 variable "private_subnets" {}
 variable "instance_profile" {}
+variable "volume_size" {}
 
