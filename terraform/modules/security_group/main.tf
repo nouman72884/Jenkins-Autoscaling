@@ -8,14 +8,16 @@ resource "aws_security_group" "instance_security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["18.212.37.142/32","172.31.89.80/32"]
-    security_groups = [aws_security_group.alb_security_group.id]
-  }
+  dynamic "ingress" {
+    for_each = var.jenkins_sg_ports
+    content {
+      from_port = ingress.key
+      to_port   = ingress.key
+      protocol  = "tcp"
+      cidr_blocks = [ingress.value]
+      security_groups = [aws_security_group.alb_security_group.id]
+    }
+    }
   tags = {
     Name = "${terraform.workspace}-${var.name}-sg"
   }
@@ -32,11 +34,14 @@ resource "aws_security_group" "alb_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+  dynamic "ingress" {
+    for_each = var.jenkins_sg_ports
+    content {
+      from_port = ingress.key
+      to_port   = ingress.key
+      protocol  = "tcp"
+      cidr_blocks = [ingress.value]
+    }
   }
   tags = {
     Name = "${terraform.workspace}-${var.name}-ALB-sg"
